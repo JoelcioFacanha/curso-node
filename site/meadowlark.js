@@ -1,7 +1,7 @@
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const path = require("path");
-const fortune = require("./lib/fortunes");
+const handlers = require("../lib/handlers");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,20 +15,12 @@ app.engine(
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
 
-app.get("/", (req, res) => res.render("home"));
-app.get("/about", (req, res) => {
-  res.render("about", { fortune: fortune.getFortune() });
-});
+app.get("/", handlers.home);
+app.get("/about", handlers.about);
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use((req, res) => {
-  res.status(404);
-  res.render("404");
-});
-app.use((req, res) => {
-  res.status(500);
-  res.render("500");
-});
+app.use(handlers.notFound);
+app.use(handlers.serverError);
 
 app.listen(port, () => {
   console.log(`Meadowlark app listening on port ${port}`);
