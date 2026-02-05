@@ -1,9 +1,9 @@
 {
   "name": "meadowlark",
   "version": "1.0.0",
-  "description": "",
+  "description": "Criação de um site para a turma de curso de nodejs",
   "license": "ISC",
-  "author": "",
+  "author": "Joélcio Façanha",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
