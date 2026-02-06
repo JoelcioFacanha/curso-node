@@ -7,13 +7,21 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.engine(
-  "handlebars",
+  "hbs",
   expressHandlebars.engine({
+    extname: "hbs",
     defaultLayout: "main",
-    extname: ".hbs",
+    helpers: {
+      section: function (name, options) {
+        if (!this._sections) this._sections = {};
+        this._sections[name] = options.fn(this);
+        return null;
+      },
+    },
   }),
 );
-app.set("view engine", "handlebars");
+
+app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
 
 app.disable("x-powered-by");
