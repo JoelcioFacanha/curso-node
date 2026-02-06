@@ -15,8 +15,11 @@ app.engine(
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
 
+app.disable("x-powered-by");
+
 app.get("/", handlers.home);
 app.get("/about", handlers.about);
+app.get("/info", handlers.info);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(handlers.notFound);
