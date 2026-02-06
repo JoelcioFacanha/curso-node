@@ -10,6 +10,7 @@ app.engine(
   "handlebars",
   expressHandlebars.engine({
     defaultLayout: "main",
+    extname: ".hbs",
   }),
 );
 app.set("view engine", "handlebars");
